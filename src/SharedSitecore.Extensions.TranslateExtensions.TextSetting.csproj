@@ -6,6 +6,7 @@
     <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
     <ProjectGuid>{0E0AB989-2A0F-4B87-AAD8-F4E34C478908}</ProjectGuid>
     <OutputType>Library</OutputType>
+    <GeneratePackageOnBuild>true</GeneratePackageOnBuild>
     <AppDesignerFolder>Properties</AppDesignerFolder>
     <RootNamespace>SharedSitecore.Extensions.TranslateExtensions.TextSetting</RootNamespace>
     <AssemblyName>SharedSitecore.Extensions.TranslateExtensions.TextSetting</AssemblyName>
@@ -529,6 +530,14 @@
   </ItemGroup>
   <ItemGroup>
     <None Include="packages.config" />
+    <None Include="SharedSitecore.Extensions.TranslateExtensions.TextSetting.nuspec" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="..\LICENSE">
+      <Pack>True</Pack>
+      <PackagePath>
+      </PackagePath>
+    </None>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <PropertyGroup>
