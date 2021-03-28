@@ -532,7 +532,7 @@
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <PropertyGroup>
-    <PostBuildEvent>Powershell.exe -ExecutionPolicy Unrestricted -file D:\repos\SharedSitecore\SharedSitecore.DeploySitecoreProject\Deploy-SitecoreProject.ps1 $(ProjectDir)</PostBuildEvent>
+    <PostBuildEvent>IF "$(ConfigurationName)" == "Debug" (Powershell.exe -ExecutionPolicy Unrestricted -file D:\repos\SharedSitecore\SharedSitecore.DeploySitecoreProject\Deploy-SitecoreProject.ps1 $(ProjectDir))</PostBuildEvent>
   </PropertyGroup>
   <Import Project="\packages\RazorGenerator.MsBuild.2.4.7\build\RazorGenerator.MsBuild.targets" Condition="Exists('\packages\RazorGenerator.MsBuild.2.4.7\build\RazorGenerator.MsBuild.targets')" />
   <Target Name="EnsureNuGetPackageBuildImports" BeforeTargets="PrepareForBuild">
