@@ -9,19 +9,34 @@ on:
 jobs:
   build:
 
-    runs-on: ubuntu-latest
+    runs-on: windows-latest
 
     steps:
     - uses: actions/checkout@v2
-    - name: Setup .NET
-      uses: actions/setup-dotnet@v1
+      name: Checkout Code
+     
+    #- name: Setup MSBuild Path
+    #  uses: warrenbuckley/Setup-MSBuild@v1
+    - name: Setup MSBuild
+      uses: microsoft/setup-msbuild@v1.0.2
+      
+    - name: Setup NuGet
+      uses: NuGet/setup-nuget@v1.0.5
+     
+    - name: Restore NuGet Packages
+      run: nuget restore SharedSitecore.Extensions.TranslateExtensions.TextSetting.sln
+ 
+    #- name: Build and Publish Web App
+    #  run: msbuild SharedSitecore.Extensions.TranslateExtensions.TextSetting.sln /p:Configuration=Release /p:DeployOnBuild=true
+    
+    #- name: Setup MSBuild.exe
+    #  uses: warrenbuckley/Setup-MSBuild@v1
+    - name: Build with MSBuild
+      run: msbuild  SharedSitecore.Extensions.TranslateExtensions.TextSetting.sln -p:Configuration=Release
+      
+    - name: package publish nuget
+      id: publish_nuget
+      uses: rohith/publish-nuget@v2
       with:
-        dotnet-version: 5.0.x
-    - name: Restore dependencies
-      run: dotnet restore
-    - name: Build
-      run: dotnet build --no-restore -c Release
-    - name: Test
-      run: dotnet test --no-build --verbosity normal
-    - name: Publish NuGet
-      run: dotnet nuget push src/bin/Release/SharedSitecore.Extensions.TranslateExtensions.TextSetting.0.0.1.nupkg --api-key  ${{ secrets.NUGET_KEY }} --source https://api.nuget.org/v3/index.json
+          # Filepath of the project to be packaged, relative to root of repository
+          PROJECT_FILE_PATH: D:\a\SharedSitecore.Extensions.TranslateExtensions.TextSetting\SharedSitecore.Extensions.TranslateExtensions.TextSetting\src\SharedSitecore.Extensions.TranslateExtenisons.TextSetting.csproj
