@@ -26,7 +26,12 @@ jobs:
  
     #- name: Build and Publish Web App
     #  run: msbuild SharedSitecore.Extensions.TranslateExtensions.TextSetting.sln /p:Configuration=Release /p:DeployOnBuild=true
- 
+    
+    - name: Setup MSBuild.exe
+      uses: warrenbuckley/Setup-MSBuild@v1
+    - name: Build with MSBuild
+      run: msbuild  SharedSitecore.Extensions.TranslateExtensions.TextSetting.sln -p:Configuration=Release
+      
     - name: package publish nuget
       id: publish_nuget
       uses: rohith/publish-nuget@v2
