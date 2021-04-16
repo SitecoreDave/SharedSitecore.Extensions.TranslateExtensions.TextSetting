@@ -1,4 +1,4 @@
-name: .NET
+name: SharedSitecore.Extensions.TranslateExtensions.TextSetting
 
 on:
   push:
@@ -24,7 +24,7 @@ jobs:
       uses: NuGet/setup-nuget@v1.0.5
      
     - name: Restore NuGet Packages
-      run: nuget restore SharedSitecore.Extensions.TranslateExtensions.TextSetting.sln
+      run: nuget restore ${{github.workflow}}.sln
  
     #- name: Build and Publish Web App
     #  run: msbuild SharedSitecore.Extensions.TranslateExtensions.TextSetting.sln /p:Configuration=Release /p:DeployOnBuild=true
@@ -32,17 +32,17 @@ jobs:
     #- name: Setup MSBuild.exe
     #  uses: warrenbuckley/Setup-MSBuild@v1
     - name: Build with MSBuild
-      run: msbuild  SharedSitecore.Extensions.TranslateExtensions.TextSetting.sln -p:Configuration=Release
+      run: msbuild ${{github.workflow}}.sln -p:Configuration=Release
       
     - name: package publish nuget
       id: publish_nuget
       uses: rohith/publish-nuget@v2
       with:
           # Filepath of the project to be packaged, relative to root of repository
-          PROJECT_FILE_PATH: D:\a\SharedSitecore.Extensions.TranslateExtensions.TextSetting\SharedSitecore.Extensions.TranslateExtensions.TextSetting\src\SharedSitecore.Extensions.TranslateExtensions.TextSetting.csproj
+          PROJECT_FILE_PATH: D:\a\${{github.workflow}}\${{github.workflow}}\src\${{github.workflow}}.csproj
     
           # NuGet package id, used for version detection & defaults to project name
-          PACKAGE_NAME: SharedSitecore.Extensions.TranslateExtensions.TextSetting
+          PACKAGE_NAME: ${{github.workflow}}
           
           # Filepath with version info, relative to root of repository & defaults to PROJECT_FILE_PATH
           # VERSION_FILE_PATH: Directory.Build.props
